@@ -1,0 +1,11 @@
+---
+applications:
+  - name: humana-quote-service
+    instances: 1
+    memory: 1G
+    disk: 1G
+    path: 'target/quote-service-0.0.1-SNAPSHOT.jar'
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
+    buildpacks:
+      - 'https://github.com/cloudfoundry/java-buildpack.git'
