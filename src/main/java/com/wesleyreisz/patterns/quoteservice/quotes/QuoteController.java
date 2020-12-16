@@ -1,5 +1,7 @@
 package com.wesleyreisz.patterns.quoteservice.quotes;
 
+import java.io.IOException;
+import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,18 @@ public class QuoteController {
 
     @RequestMapping("/")
     public ResponseEntity<Quote> getRandomQuote(){
+        ResponseEntity<Quote> resp = quoteService.getQuote();
+        LOG.info(resp.toString());
+        return resp;
+    }
+
+    @RequestMapping("/random")
+    public ResponseEntity<Quote> getRandomQuoteRandomError() {
+        int val = new Random().nextInt(10 - 1 + 1) + 1;
+        if (val > 8){
+            LOG.info("Forcing an exception back to the client");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown exception");
+        }
         ResponseEntity<Quote> resp = quoteService.getQuote();
         LOG.info(resp.toString());
         return resp;
