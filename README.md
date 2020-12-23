@@ -1,4 +1,6 @@
 ### Notes:
+Run locally
+`./mvnw spring-boot:run`
 
 Deploy:
 ` cf push CFDemoApp -p target/demo-0.0.1-SNAPSHOT.jar -b https://github.com/cloudfoundry/java-buildpack.git`
@@ -26,6 +28,9 @@ applications:
     buildpacks:
       - 'https://github.com/cloudfoundry/java-buildpack.git'
 ```
+Open apps manager
+`http://apps.sys.tas2.wesleyreisz.com/`
+
 
 Java tips:
 `https://docs.cloudfoundry.org/buildpacks/java/java-tips.html`

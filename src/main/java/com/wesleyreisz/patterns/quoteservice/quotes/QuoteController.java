@@ -16,6 +16,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 @RestController
 @RequestMapping(value = {"/quotes"})
 public class QuoteController {
@@ -32,10 +34,11 @@ public class QuoteController {
     }
 
     @RequestMapping("/random")
-    public ResponseEntity<Quote> getRandomQuoteRandomError() {
+    public ResponseEntity<Quote> getRandomQuoteRandomError() throws InterruptedException {
         int val = new Random().nextInt(10 - 1 + 1) + 1;
         if (val > 8){
             LOG.info("Forcing an exception back to the client");
+            SECONDS.sleep(1);
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown exception");
         }
         ResponseEntity<Quote> resp = quoteService.getQuote();
